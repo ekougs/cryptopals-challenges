@@ -1,29 +1,8 @@
+# From https://cryptopals.com/sets/1/challenges/1
+
 from typing import Iterator
 
-_hex_to_bin_dict = {
-    '0': '0000',
-    '1': '0001',
-    '2': '0010',
-    '3': '0011',
-    '4': '0100',
-    '5': '0101',
-    '6': '0110',
-    '7': '0111',
-    '8': '1000',
-    '9': '1001',
-    'A': '1010',
-    'B': '1011',
-    'C': '1100',
-    'D': '1101',
-    'E': '1110',
-    'F': '1111',
-    'a': '1010',
-    'b': '1011',
-    'c': '1100',
-    'd': '1101',
-    'e': '1110',
-    'f': '1111',
-}
+from set1 import HEX_TO_BIN_DICT
 
 _bin_to_base_64_dict = {
     '000000': 'A',
@@ -95,7 +74,7 @@ _bin_to_base_64_dict = {
 
 def hex_to_bytes_iterator(hex_str: str) -> Iterator[str]:
     while hex_str:
-        yield _hex_to_bin_dict[hex_str[0]] + _hex_to_bin_dict[hex_str[1]]
+        yield HEX_TO_BIN_DICT[hex_str[0]] + HEX_TO_BIN_DICT[hex_str[1]]
         hex_str = hex_str[2:]
 
 

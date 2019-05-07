@@ -3,7 +3,7 @@ from set1.base64enc import hex_to_base64
 
 def test_base64_encoding_padding_once():
     # GIVEN
-    hex_str = '4D61'
+    hex_str = '4d61'
 
     # WHEN
     actual = hex_to_base64(hex_str)
@@ -14,7 +14,7 @@ def test_base64_encoding_padding_once():
 
 def test_base64_encoding_padding_twice():
     # GIVEN
-    hex_str = '4D'
+    hex_str = '4d'
 
     # WHEN
     actual = hex_to_base64(hex_str)
