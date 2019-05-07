@@ -4,3 +4,7 @@ venv
 # IDE
 .idea
 *.iml
+
+# Caches
+.mypy_cache
+__pycache__
