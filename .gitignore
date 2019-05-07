@@ -1,0 +1,6 @@
+# Virtual env
+venv
+
+# IDE
+.idea
+*.iml
