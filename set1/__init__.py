@@ -20,3 +20,7 @@ HEX_TO_BIN_DICT = {
 BIN_TO_HEX_DICT = {}
 for hex, bits in HEX_TO_BIN_DICT.items():
     BIN_TO_HEX_DICT[bits] = hex
+
+
+def from_chars_to_hex_list(chars):
+    return [format(ord(char), 'x') for char in chars]

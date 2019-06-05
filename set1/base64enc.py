@@ -1,4 +1,4 @@
-# From https://cryptopals.com/sets/1/challenges/1
+# https://cryptopals.com/sets/1/challenges/1
 
 from typing import Iterator
 
