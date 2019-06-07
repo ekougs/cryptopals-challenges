@@ -1,5 +1,7 @@
+import pytest
+
 from set1.fixed_xor import fixed_xor
-from set1.single_byte_xor_decipher import single_byte_decipher
+from set1.single_byte_xor_decipher import single_byte_decipher, NoPossibleKeyError, UndecipherablePhraseError
 
 
 def test_challenge_should_match():
@@ -27,3 +29,23 @@ def test_on_a_longer_sample():
     # THEN
     assert actual == 'Tool to decrypt/encrypt with XOR automatically. XOR Cipher is a cryptographic method developed with computers. Is consists in encrypt' \
                      'ing a binary message with a repeated key using a XOR multiplication.'
+
+
+def test_if_no_possible_key_then_exception_is_raised():
+    # GIVEN
+    hex_cyphered_str = '0e3647e8592d35514a081243582536ed3de6734059001e3f535ce6271032'
+
+    # THEN
+    with pytest.raises(NoPossibleKeyError):
+        # WHEN
+        single_byte_decipher(hex_cyphered_str)
+
+
+def test_if_possible_key_but_undecipherable_phrase_then_exception_is_raised():
+    # GIVEN
+    hex_cyphered_str = '03222801255c2c211a7aeb1e042b4e38e8f1293143203139fb202c325f2b'
+
+    # THEN
+    with pytest.raises(UndecipherablePhraseError):
+        # WHEN
+        single_byte_decipher(hex_cyphered_str)
