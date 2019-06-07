@@ -1,3 +1,4 @@
+import binascii
 from typing import Dict, List
 
 # source https://en.wikipedia.org/wiki/Frequency_analysis
@@ -28,6 +29,10 @@ HEX_TO_BIN_DICT = {
 BIN_TO_HEX_DICT = {}
 for hex, bits in HEX_TO_BIN_DICT.items():
     BIN_TO_HEX_DICT[bits] = hex
+
+
+def convert_ascii_to_hex(chars: str) -> str:
+    return str(binascii.hexlify(chars.encode('ascii')), 'ascii')
 
 
 def get_most_frequent_chars(hex_str: str) -> List[str]:

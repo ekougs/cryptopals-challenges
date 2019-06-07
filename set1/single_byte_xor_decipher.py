@@ -1,5 +1,4 @@
 # https://cryptopals.com/sets/1/challenges/3
-from typing import Optional
 
 from set1 import FREQUENT_CHARS_HEX, is_likely_english_text_via_most_frequent_chars, get_most_frequent_chars
 from set1.fixed_xor import fixed_xor
