@@ -1,5 +1,5 @@
 import binascii
-from typing import Dict, List
+from typing import Dict, List, Iterator
 
 # source https://en.wikipedia.org/wiki/Frequency_analysis
 # source https://en.wikipedia.org/wiki/Frequency_analysis#/media/File:English_letter_frequency_(alphabetic).svg
@@ -27,8 +27,8 @@ HEX_TO_BIN_DICT = {
 }
 
 BIN_TO_HEX_DICT = {}
-for hex, bits in HEX_TO_BIN_DICT.items():
-    BIN_TO_HEX_DICT[bits] = hex
+for hex_str, bits in HEX_TO_BIN_DICT.items():
+    BIN_TO_HEX_DICT[bits] = hex_str
 
 
 def convert_ascii_to_hex(chars: str) -> str:
