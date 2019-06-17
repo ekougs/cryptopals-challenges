@@ -1,10 +1,11 @@
 # https://cryptopals.com/sets/1/challenges/1
-
+import base64
+from binascii import Error
 from typing import Iterator
 
 from set1 import HEX_TO_BIN_DICT
 
-_bin_to_base_64_dict = {
+BITS_TO_BASE_64_DICT = {
     '000000': 'A',
     '000001': 'B',
     '000010': 'C',
@@ -97,7 +98,7 @@ def hex_to_base64(hex_str: str) -> str:
             # Pad the last bits to get a sextet to decode
             bits_str_to_decode, bits_buffer = bits_buffer + ('0' * (6 - bits_buffer_length)), ''
             last_sextet_has_been_padded = True
-        base64_translation += _bin_to_base_64_dict[bits_str_to_decode]
+        base64_translation += BITS_TO_BASE_64_DICT[bits_str_to_decode]
         bits_buffer += next(bytes_iterator, '')
 
     # Complete the padding

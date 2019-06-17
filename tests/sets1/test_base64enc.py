@@ -1,3 +1,5 @@
+import pytest
+
 from set1.base64enc import hex_to_base64
 
 
