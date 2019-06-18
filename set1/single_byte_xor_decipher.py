@@ -23,21 +23,10 @@ def single_byte_decipher(hex_str: str) -> Tuple[str, str, int]:
     if not potential_hex_key:
         raise NoPossibleKeyError()
 
-    try:
-        return bytearray.fromhex(xor_hex_with_repeating_key(hex_str, potential_hex_key)).decode(), bytearray.fromhex(potential_hex_key).decode(), min_score
-    except UnicodeDecodeError:
-        raise UndecipherablePhraseError()
+    return bytearray.fromhex(xor_hex_with_repeating_key(hex_str, potential_hex_key)).decode(), bytearray.fromhex(potential_hex_key).decode(), min_score
 
 
-class DecipherError(Exception):
-    pass
-
-
-class NoPossibleKeyError(DecipherError):
-    pass
-
-
-class UndecipherablePhraseError(DecipherError):
+class NoPossibleKeyError(Exception):
     pass
 
 
@@ -62,7 +51,7 @@ def _get_chars_occurrences(hex_str: str) -> Dict[int, int]:
 # Because it is basically the sum of differences between expected number of occurrences of the chars in english and actual occurrences
 def _get_chi2(str_char_occurrences, str_len, key: int):
     # if some non printable ascii characters, it gets max possible score as it certainly is not english
-    if any([c not in _printable_ascii_dec_encrypted_codes[key] for c in str_char_occurrences]):
+    if any((c not in _printable_ascii_dec_encrypted_codes[key] for c in str_char_occurrences)):
         return sys.maxsize
 
     chi2 = 0
@@ -79,11 +68,11 @@ def _get_chi2(str_char_occurrences, str_len, key: int):
         difference = observed - expected
         chi2 += difference * difference / expected
 
-    for punct_encrypt_char in [
-        punct_encrypt_char
-        for punct_encrypt_char in cur_english_encrypt_freq
-        if punct_encrypt_char not in cur_letters_ascii_encrypted_dec_codes
-    ]:
+    for punct_encrypt_char in (
+            punct_encrypt_char
+            for punct_encrypt_char in cur_english_encrypt_freq
+            if punct_encrypt_char not in cur_letters_ascii_encrypted_dec_codes
+    ):
         observed = str_char_occurrences[punct_encrypt_char] if punct_encrypt_char in str_char_occurrences else 0
         expected = str_len * cur_english_encrypt_freq[punct_encrypt_char]
         difference = observed - expected
@@ -93,7 +82,7 @@ def _get_chi2(str_char_occurrences, str_len, key: int):
     # Their expected frequency is not known but I fixed it to 100 times lower than any word character
     # As they are highly unlikely to appear in an english text
     expected_other_chars = 0.0000074 * str_len
-    for char in [char for char in str_char_occurrences if char not in _evaluated_freq_ascii_dec_encrypted_codes[key]]:
+    for char in (char for char in str_char_occurrences if char not in _evaluated_freq_ascii_dec_encrypted_codes[key]):
         observed = str_char_occurrences[char]
         difference = observed - expected_other_chars
         chi2 += difference * difference / expected_other_chars

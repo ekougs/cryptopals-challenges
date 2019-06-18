@@ -1,6 +1,4 @@
 # https://cryptopals.com/sets/1/challenges/1
-import base64
-from binascii import Error
 from typing import Iterator
 
 from set1 import HEX_TO_BIN_DICT
